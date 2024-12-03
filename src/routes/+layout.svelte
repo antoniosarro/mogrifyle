@@ -2,7 +2,7 @@
 	import '$styles/app.css';
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { Footer, Header } from '$components/shared';
+	import { DarkReader, Footer, Header } from '$components/shared';
 
 	let { children } = $props();
 
@@ -22,6 +22,8 @@
 
 	onMount(preparePageTransition);
 </script>
+
+<DarkReader />
 
 <div class="layout-container">
 	<Header />
