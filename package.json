@@ -1,34 +1,68 @@
 {
 	"name": "mogrifyle",
-	"version": "0.0.1",
+	"description": "",
+	"version": "1.0.0",
+	"author": {
+		"name": "Antonio Sarro",
+		"url": "https://antoniosarro.dev",
+		"email": "contact@antoniosarro.dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/antoniosarro/mogrifyle.git"
+	},
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"prebuild": "rimraf .svelte-kit && rimraf build",
+		"pre-commit": "lint-staged",
+		"dev:sveltekit": "vite dev",
+		"dev:sveltekit:host": "vite dev --host=0.0.0.0",
+		"dev": "pnpm dev:sveltekit",
+		"dev:host": "pnpm dev:sveltekit:host",
+		"dev:open": "pnpm dev --open",
+		"dev:host:open": "pnpm dev --open --host",
 		"build": "vite build",
 		"preview": "vite preview",
+		"preview:open": "pnpm preview --open",
+		"preview:host": "pnpm preview --host",
+		"preview:host:open": "pnpm preview --open --host",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write .",
+		"eslint": "eslint .",
+		"eslint:fix": "eslint . --fix",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"prepare": "husky"
 	},
 	"devDependencies": {
+		"@commitlint/config-conventional": "^19.6.0",
 		"@eslint/compat": "^1.2.3",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.9.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@types/node": "^22.10.1",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
+		"husky": "^9.1.7",
+		"iconify-icon": "^2.1.0",
+		"lint-staged": "^15.2.10",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
+		"rimraf": "^6.0.1",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.9",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0",
 		"vite": "^6.0.0"
+	},
+	"dependencies": {
+		"@ffmpeg/ffmpeg": "^0.12.10",
+		"@ffmpeg/util": "^0.12.1",
+		"file-selector": "^2.1.2"
 	}
 }

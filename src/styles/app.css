@@ -1,0 +1,29 @@
+/* Import Tailwind CSS layers */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Import fonts with optimized subset and display swap */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap&display=swap');
+
+/* Base HTML elements */
+html {
+	@apply scroll-smooth antialiased;
+	@apply selection:bg-accent-400 selection:text-black-500;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	@apply flex min-h-screen w-full flex-col items-center;
+	@apply font-manrope text-base;
+	@apply bg-white-500 text-black-500;
+	@apply dark:bg-black-500 dark:text-white-500;
+	@apply transition-colors duration-300;
+}
+
+/* Prevent layout shift by always showing scrollbar */
+@layer base {
+	html {
+		@apply overflow-y-scroll;
+	}
+}
