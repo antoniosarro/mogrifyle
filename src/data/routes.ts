@@ -19,9 +19,9 @@ export const routes: Route[] = [
 		title: 'Home',
 		path: '/',
 		show: false,
-		description: 'Passionate Geek Guy, Software Developer and Writer',
+		description: 'Convert your files to web-friendly formats with ease and speed.',
 		image: '',
-		url: 'https://antoniosarro.dev/',
+		url: 'https://mogrifyle.antoniosarro.dev/',
 		twitter: {
 			image: '',
 			imageAlt: 'Antonio Sarro',
@@ -34,9 +34,9 @@ export const routes: Route[] = [
 		title: 'About',
 		path: '/about',
 		show: true,
-		description: 'Do you want to know more about me? This is the right place',
+		description: 'Learn more about Mogrifyle and how it works.',
 		image: '',
-		url: 'https://antoniosarro.dev/about',
+		url: 'https://mogrifyle.antoniosarro.dev/about',
 		twitter: {
 			image: '',
 			imageAlt: 'About',
@@ -49,13 +49,12 @@ export const routes: Route[] = [
 		title: 'Privacy',
 		path: '/privacy',
 		show: true,
-		description:
-			'Learn about the projects I worked on, with an in-depth look at the technologies used',
+		description: 'Learn about the privacy policy of Mogrifyle.',
 		image: '',
-		url: 'https://antoniosarro.dev/projects',
+		url: 'https://mogrifyle.antoniosarro.dev/privacy',
 		twitter: {
 			image: '',
-			imageAlt: 'Projects',
+			imageAlt: 'Privacy',
 			site: '@_antoniosarro_',
 			creator: '@_antoniosarro_',
 			handle: '@_antoniosarro_'

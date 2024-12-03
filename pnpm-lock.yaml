@@ -23,6 +23,9 @@ importers:
       polka:
         specifier: ^0.5.2
         version: 0.5.2
+      svelte-meta-tags:
+        specifier: ^4.0.4
+        version: 4.0.4(svelte@5.4.0)(typescript@5.7.2)
     devDependencies:
       '@commitlint/config-conventional':
         specifier: ^19.6.0
@@ -1565,6 +1568,11 @@ packages:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
     engines: {node: '>=6'}
 
+  schema-dts@1.1.2:
+    resolution: {integrity: sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
@@ -1662,6 +1670,11 @@ packages:
     peerDependenciesMeta:
       svelte:
         optional: true
+
+  svelte-meta-tags@4.0.4:
+    resolution: {integrity: sha512-i0vgxGreM3lXTTxLSuPQLE1n56KAFACHWIXRj7fJCTpd/5D16O97Ha/OXDZS4Lsk+D347VEK4LeMoacsftbeKw==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   svelte@5.4.0:
     resolution: {integrity: sha512-2I/mjD8cXDpKfdfUK+T6yo/OzugMXIm8lhyJUFM5F/gICMYnkl3C/+4cOSpia8TqpDsi6Qfm5+fdmBNMNmaf2g==}
@@ -3132,6 +3145,10 @@ snapshots:
     dependencies:
       mri: 1.2.0
 
+  schema-dts@1.1.2(typescript@5.7.2):
+    dependencies:
+      typescript: 5.7.2
+
   semver@7.6.3: {}
 
   set-cookie-parser@2.7.1: {}
@@ -3231,6 +3248,13 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.4.49)
     optionalDependencies:
       svelte: 5.4.0
+
+  svelte-meta-tags@4.0.4(svelte@5.4.0)(typescript@5.7.2):
+    dependencies:
+      schema-dts: 1.1.2(typescript@5.7.2)
+      svelte: 5.4.0
+    transitivePeerDependencies:
+      - typescript
 
   svelte@5.4.0:
     dependencies:
