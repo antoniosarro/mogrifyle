@@ -5,8 +5,8 @@
 <div class="mb-6 flex flex-col items-center justify-center gap-6">
 	<section class="flex w-full flex-col items-start justify-start gap-4">
 		<p class="dark:text-white-600">
-			Welcome to our Browser-Based File Converter! Transform your files directly in your browser
-			with complete confidence - no uploads needed. Our tool handles everything locally, making file
+			Welcome to my Browser-Based File Converter! Transform your files directly in your browser with
+			complete confidence - no uploads needed. Our tool handles everything locally, making file
 			conversion both secure and straightforward. Start converting your files today with total
 			privacy!
 		</p>

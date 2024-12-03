@@ -10,6 +10,12 @@
 
 		ffmpegState.ffmpeg = new FFmpeg();
 
+		ffmpegState.ffmpeg.on('progress', (progress) => {
+			if (progress.progress === 1) {
+				ffmpegState.isConverting = false;
+			}
+		});
+
 		try {
 			await ffmpegState.ffmpeg.load({
 				coreURL: `${baseURL}/ffmpeg-core.js`,

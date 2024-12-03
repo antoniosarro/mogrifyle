@@ -13,7 +13,7 @@
 		</div>
 	</div>
 </div>
-<p class="font-semibold text-white-500">Loading FFmpeg...</p>
+<p class="font-semibold text-black-500 dark:text-white-500">Loading FFmpeg...</p>
 
 <style lang="postcss">
 	.scene {

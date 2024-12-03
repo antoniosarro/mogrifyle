@@ -28,7 +28,7 @@
 	const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="text-center text-sm">
+<footer class="mt-auto text-center text-sm sm:text-base">
 	<div class="flex flex-col items-center gap-1">
 		<p class="flex items-center gap-2">
 			<span class="font-bold">Built with</span>
@@ -47,7 +47,7 @@
 				<a {href} rel="noreferrer noopener" target="_blank" aria-label={label}>
 					<iconify-icon
 						{icon}
-						class="text-xl text-gray-800 dark:text-accent-500"
+						class="text-xl text-gray-800 sm:text-2xl dark:text-accent-500"
 						role="img"
 						noobserver
 					></iconify-icon>

@@ -55,7 +55,7 @@
 <div
 	tabindex="0"
 	role="button"
-	class=" relative cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-8 text-center transition-all duration-300 ease-in-out"
+	class=" relative cursor-pointer rounded-lg border-2 border-dashed border-gray-500 p-8 text-center transition-all duration-300 ease-in-out sm:p-12 lg:py-20 xl:py-28 dark:border-gray-300"
 	ondrop={preventDefault(handleDrop)}
 	onkeydown={keydown}
 	onclick={() => input.click()}
@@ -68,7 +68,9 @@
 		type="file"
 		class="absolute inset-0 h-full w-full cursor-pointer opacity-0"
 	/>
-	<div class="flex items-center justify-center gap-2 text-base font-bold text-white-500">
+	<div
+		class="flex items-center justify-center gap-2 text-base font-bold text-black-400 sm:text-lg dark:text-white-500"
+	>
 		<iconify-icon icon="mdi:cloud-upload" width="24"></iconify-icon>
 		<span>Drop files here or click to upload</span>
 	</div>

@@ -11,7 +11,7 @@
 			{#if show}
 				<li>
 					<a
-						class="text-lg uppercase {currentRoute === path
+						class="text-lg uppercase sm:text-xl {currentRoute === path
 							? 'font-bold text-accent-500'
 							: 'font-normal'}"
 						href={path}>{title}</a

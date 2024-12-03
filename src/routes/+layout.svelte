@@ -35,7 +35,7 @@
 
 <style lang="postcss">
 	.layout-container {
-		@apply container mx-auto min-h-screen px-6 py-4;
+		@apply container mx-auto flex min-h-screen flex-col px-6 py-4;
 	}
 
 	main {

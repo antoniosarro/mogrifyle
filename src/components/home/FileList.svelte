@@ -22,17 +22,20 @@
 
 	function convertAll() {
 		filesState.files.forEach(async (file) => {
-			ffmpegState.isConverting = true;
-			try {
-				if (!ffmpegState.ffmpeg) return;
-				const { url, output } = await convert(ffmpegState.ffmpeg, file);
+			if (!file.unsupported && !file.is_converted && !file.is_error) {
+				ffmpegState.isConverting = true;
+				try {
+					if (!ffmpegState.ffmpeg) return;
+					const { url, output } = await convert(ffmpegState.ffmpeg, file);
 
-				file.is_converted = true;
-				file.url = url;
-				file.output = output;
-			} catch (err) {
-				file.is_error = true;
-				console.error('Error converting file:', err);
+					file.is_converted = true;
+					file.url = url;
+					file.output = output;
+				} catch (err) {
+					file.is_error = true;
+					ffmpegState.isConverting = false;
+					console.error('Error converting file:', err);
+				}
 			}
 		});
 	}
@@ -57,93 +60,89 @@
 	}
 </script>
 
-<div>
+<div class="flex flex-col gap-4">
 	{#each filesState.files as file}
-		<div class="flex items-center justify-between border-b border-gray-100 p-3">
+		<div
+			class="flex items-center justify-between border-b border-gray-500 p-3 dark:border-gray-100"
+		>
 			<div class="flex flex-1 items-center gap-2">
-				{#if fileIcon[file.fileType] && conversionFormats[file.fileType]}
-					<iconify-icon icon={fileIcon[file.fileType]} class="text-xl text-gray-500"></iconify-icon>
-					<span class="w-32 truncate text-sm font-semibold text-white-500">{file.fileName}</span>
-					{#if !ffmpegState.isConverting && !file.is_converted}
-						<span class="text-sm text-white-700">{file.fileSize}</span>
-					{/if}
+				{#if conversionFormats[file.fileType]}
+					<iconify-icon icon={fileIcon[file.fileType]} class="text-xl text-gray-500 sm:text-2xl"
+					></iconify-icon>
 				{:else}
-					<iconify-icon icon="mdi:file" class="text-xl text-gray-500"></iconify-icon>
-					<span class="w-32 truncate text-sm font-semibold text-white-500">{file.fileName}</span>
-					<span class="text-sm font-semibold text-red-500">Unsupported file type</span>
+					<iconify-icon icon="mdi:file" class="text-xl text-gray-500 sm:text-2xl"></iconify-icon>
+				{/if}
+				<span
+					class="w-32 truncate text-sm font-semibold text-black-400 sm:w-40 sm:text-base dark:text-white-500"
+					>{file.fileName}</span
+				>
+				{#if !ffmpegState.isConverting && !file.is_converted}
+					<span class="text-sm text-black-400 sm:text-base dark:text-white-700"
+						>{file.fileSize}</span
+					>
 				{/if}
 			</div>
-			{#if fileIcon[file.fileType] && conversionFormats[file.fileType]}
-				{#if !ffmpegState.isConverting && !file.is_converted}
+			<div class="flex items-center gap-4">
+				{#if !conversionFormats[file.fileType]}
+					<span class="text-sm font-semibold text-red-600 sm:text-base">Unsupported file type</span>
+				{:else if file.is_error}
+					<span class="text-sm font-semibold text-red-600 sm:text-base">Error converting file</span>
+				{:else if !file.is_converted}
+					<form>
+						<select
+							value={file.fileExtension}
+							class="w-[4.5rem] border-0 border-b-2 border-gray-400 bg-transparent px-1 py-1 text-sm focus:outline-none focus:ring-0 sm:w-[5rem] sm:text-base dark:border-white-800"
+						>
+							{#each conversionFormats[file.fileType] as format}
+								<option
+									onclick={preventDefault(() => {
+										file.to = format;
+									})}
+									class="text-sm sm:text-base"
+									value={format}>{format.toUpperCase()}</option
+								>
+							{/each}
+						</select>
+					</form>
+				{/if}
+				{#if !ffmpegState.isConverting}
 					<div class="flex items-center justify-center gap-4">
-						<form>
-							<select
-								value={file.fileExtension}
-								class="w-[4.5rem] border-0 border-b-2 bg-transparent px-1 py-1 text-sm focus:outline-none focus:ring-0 dark:border-white-800"
+						{#if file.is_converted}
+							<button
+								onclick={preventDefault(() => downloadFile(file))}
+								class="flex cursor-pointer items-center gap-2"
 							>
-								{#each conversionFormats[file.fileType] as format}
-									<option
-										onclick={preventDefault(() => {
-											file.to = format;
-										})}
-										class="text-sm"
-										value={format}>{format.toUpperCase()}</option
-									>
-								{/each}
-							</select>
-						</form>
+								<span class="text-sm font-bold text-accent-500 sm:text-base">Converted</span>
+								<iconify-icon icon="mdi:download" class="text-xl text-accent-500 sm:text-2xl"
+								></iconify-icon>
+							</button>
+						{/if}
 						<button
 							aria-label="Remove file"
 							onclick={() => removeFile(file)}
 							class="flex text-red-500"
 						>
-							<iconify-icon icon="mdi:delete" class="text-xl"></iconify-icon>
+							<iconify-icon icon="mdi:delete" class="text-xl sm:text-2xl"></iconify-icon>
 						</button>
 					</div>
-				{:else if ffmpegState.isConverting}
+				{:else if ffmpegState.isConverting && !file.unsupported}
 					<iconify-icon
 						icon="line-md:loading-twotone-loop"
 						noobserver
 						class="text-2xl text-accent-500"
 					></iconify-icon>
-				{:else if file.is_converted}
-					<div class="flex items-center justify-center gap-4">
-						<button
-							onclick={preventDefault(() => downloadFile(file))}
-							class="flex cursor-pointer items-center gap-2"
-						>
-							<span class="text-sm font-bold text-accent-500">Converted</span>
-							<iconify-icon icon="mdi:download" class="text-xl text-accent-500"></iconify-icon>
-						</button>
-						<button
-							aria-label="Remove file"
-							onclick={() => removeFile(file)}
-							class="flex text-red-500"
-						>
-							<iconify-icon icon="mdi:delete" class="text-xl"></iconify-icon>
-						</button>
-					</div>
 				{/if}
-			{:else}
-				<div class="flex items-center justify-center gap-4">
-					<button
-						aria-label="Remove file"
-						onclick={() => removeFile(file)}
-						class="flex text-red-500"
-					>
-						<iconify-icon icon="mdi:delete" class="text-xl"></iconify-icon>
-					</button>
-				</div>
-			{/if}
+			</div>
 		</div>
 	{/each}
-
-	<div class="mt-4 flex justify-end">
-		<button
-			onclick={preventDefault(convertAll)}
-			class="text-white rounded-md bg-accent-500 px-4 py-2 transition-colors hover:bg-accent-600"
-		>
-			Convert
-		</button>
-	</div>
+	{#if filesState.files.length > 0}
+		<div class="mt-4 flex justify-end">
+			<button
+				onclick={preventDefault(convertAll)}
+				class="text-white rounded-md bg-accent-500 px-3 py-1.5 font-semibold transition-colors hover:bg-accent-600 sm:text-lg"
+			>
+				Convert
+			</button>
+		</div>
+	{/if}
 </div>

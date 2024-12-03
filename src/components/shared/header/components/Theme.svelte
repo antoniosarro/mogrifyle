@@ -13,7 +13,10 @@
 	};
 </script>
 
-<label class="relative col-start-1 row-start-1 flex justify-center text-xl" for="theme-switch">
+<label
+	class="relative col-start-1 row-start-1 flex justify-center text-xl sm:text-2xl"
+	for="theme-switch"
+>
 	<input
 		name="theme-switch"
 		id="theme-switch"

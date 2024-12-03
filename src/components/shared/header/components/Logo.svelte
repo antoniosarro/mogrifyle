@@ -1,4 +1,4 @@
-<a href="/" aria-label="Home" class="col-start-2 col-end-7 mx-auto w-52 text-accent-500">
+<a href="/" aria-label="Home" class="col-start-2 col-end-7 mx-auto w-52 text-accent-500 sm:w-64">
 	<svg viewBox="0 0 405 75" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
 			d="M58.2623 5.544V66H54.3023V13.816L31.0703 66H27.9023L4.58225 13.816V66H0.622253V5.544H4.84625L29.4863 60.808L54.1263 5.544H58.2623Z"
